@@ -1,13 +1,13 @@
 # Notes
 These are just my thoughts about ongoing efforts in this project
 
-## Async
-Octocrab does a lot of things async by default. I don't think an application like this
-is likely to benefit from async execution since most of the work is short running and done
-directly at the user's direction. So for now I use `futures::block_on`. This may change in
-the future as I learn more about async rust. 
+## Sorting
+
 
 ## Pull Request/Issues
+As of now I'm pretty sure we can check the timeline for events 
+
+
 - The issues `GET` endpoint also returns PRs but PRs have additional field with links to commit and such
 - Issue mentions are tracked as 'events' which we can get for either
 

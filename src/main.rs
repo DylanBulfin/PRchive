@@ -1,8 +1,9 @@
-use easifier::{error::Result, issues::get_issue_pairs};
+use easifier::{api::{get_issue_events, get_all_issues, get_rate_limit}, error::Result};
 
-#[tokio::main]
-async fn main() -> Result<()> {
-    get_issue_pairs("rust-lang".to_string(), "rust-clippy".to_string())?;
+fn main() -> Result<()> {
+    //let issues = get_issues()?;
+    //get_rate_limit()?;
+    let events = get_issue_events()?;
 
     Ok(())
 }

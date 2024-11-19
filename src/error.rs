@@ -1,16 +1,18 @@
-use std::fmt::{Display, Write};
+use std::{fmt::{Display, Write}, io};
 
 #[derive(Debug, Clone, Copy)]
 pub enum ErrorKind {
     RawError,
-    OctocrabError,
+    UreqError,
+    IoError,
 }
 
 impl Display for ErrorKind {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match self {
             Self::RawError => f.write_str("RawError"),
-            Self::OctocrabError => f.write_str("OctocrabError"),
+            Self::UreqError => f.write_str("UreqError"),
+            Self::IoError => f.write_str("IoError"),
         }
     }
 }
@@ -42,11 +44,20 @@ impl From<&str> for Error {
     }
 }
 
-impl From<octocrab::Error> for Error {
-    fn from(value: octocrab::Error) -> Self {
+impl From<ureq::Error> for Error {
+    fn from(value: ureq::Error) -> Self {
         Self {
             message: value.to_string(),
-            kind: ErrorKind::OctocrabError,
+            kind: ErrorKind::UreqError,
+        }
+    }
+}
+
+impl From<io::Error> for Error {
+    fn from(value: io::Error) -> Self {
+        Self {
+            message: value.to_string(),
+            kind: ErrorKind::IoError,
         }
     }
 }

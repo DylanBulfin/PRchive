@@ -53,6 +53,7 @@ dependencies = [
 name = "easifier"
 version = "0.1.0"
 dependencies = [
+ "serde",
  "ureq",
 ]
 

@@ -3,35 +3,19 @@
 /// - A list of repositories stored locally, along with the Issue/PR pair the user has
 /// checked out
 
-pub enum ActorType {
-    Owner,
-    Admin,
-    Maintainer,
-    Collaborator,
-    Contributor,
-    None,
-}
+//pub struct Comment {
+//    author: Actor,
+//    content: String,
+//}
 
-/// This contains information about the actor associated with certain actions. Mainly
-/// useful to distinguish users as contributors/maintainers.
-pub struct Actor {
-    username: String,
-    profile_url: String,
-    actor_type: ActorType,
-}
-
-pub struct Comment {
-    author: Actor,
-    content: String,
-}
+use crate::api::IssueData;
 
 pub struct Issue {
-    author: Actor,
-    issue_number: u64,
+
 }
 
 pub struct PullRequest {
-    author: Actor,
+    //author: Actor,
     issue_number: u64,
 
     // The hash of the merge commit
@@ -43,7 +27,7 @@ pub struct PullRequest {
 }
 
 pub struct IssuePair {
-    issue: Issue,
+    issue: IssueData,
     pull_request: PullRequest,
 }
 
