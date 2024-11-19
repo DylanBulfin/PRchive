@@ -1,3 +1,8 @@
+pub mod repo_mgmt;
+pub mod state;
+pub mod issues;
+pub mod error;
+
 pub fn add(left: u64, right: u64) -> u64 {
     left + right
 }

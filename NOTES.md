@@ -16,4 +16,33 @@ we know if one or both of them solve the issue?
 Additionally we probably want to limit ourselves to issue-PR pairs where the PR was merged and the issue closed around
 the same time (within a day, say, or maybe longer or shorter depending on how active the project is)
 
+## Things to find out
+- Do PRs tell you the branch they were merged into?
+    - Since we want to checkout the commit immediately before the PR merge we need more information than just the SHA
 
+
+
+## GraphQL
+GitHub has a GraphQL API which might allow simplified fetching code. I've identified the
+following query that fetches any PRs that have referenced an issue, and gets their PR
+number and the commit HASH the PR branch is based on
+```
+query {
+  repository(owner: "rust-lang", name: "rust-clippy") {
+    issue(number: 12542) {
+      timelineItems(first: 100) {
+        nodes {
+          ... on CrossReferencedEvent {
+           source {
+              ... on PullRequest {
+                number
+                baseRefOid
+              }
+            }
+          }
+        }
+	  }
+    }
+  }
+}
+```
