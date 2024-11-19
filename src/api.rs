@@ -125,7 +125,7 @@ pub fn get_rate_limit() -> Result<()> {
 }
 
 pub fn get_filtered_issues() -> Result<Vec<IssueData>> {
-
+    unimplemented!()
 }
 
 pub fn get_all_issues() -> Result<Vec<IssueData>> {
