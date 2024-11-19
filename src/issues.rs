@@ -1,4 +1,5 @@
-use octocrab::Octocrab;
+use futures::executor::{self, block_on};
+use octocrab::{models::issues, params::State, service::middleware::extra_headers::ExtraHeaders, Octocrab, Page};
 
 use crate::{error::Result, state::IssuePair};
 
@@ -7,19 +8,25 @@ use crate::{error::Result, state::IssuePair};
 
 const LABEL: &str = "good-first-issue";
 
-pub async fn get_issue_pairs(owner: &str, repo: &str) -> Result<Vec<IssuePair>> {
-    let crab = Octocrab::builder()
-        .base_uri("https://github.com")?
-        .build()?;
+pub async fn get_issues_page(
+    owner: &str,
+    repo: &str,
+    crab: &Octocrab,
+    labels: &[String],
+    page: u32,
+) -> Result<Page<issues::Issue>> {
 
-    let labels = vec![LABEL.to_string()];
+}
 
-    let issues = crab
-        .issues(owner, repo)
-        .list()
-        .labels(&labels)
-        .send()
-        .await?;
+pub async fn get_all_issues(
+    owner: String,
+    repo: String,
+    crab: &Octocrab,
+    labels: &[String],
+) -> Result<Vec<issues::Issue>> {
+    
+}
 
-    unimplemented!()
+pub fn get_issue_pairs(owner: String, repo: String) -> Result<Vec<IssuePair>> {
+    
 }
